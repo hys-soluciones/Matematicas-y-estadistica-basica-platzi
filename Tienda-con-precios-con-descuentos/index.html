@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Tienda con Descuentos</title>
+
+</head>
+
+<body>
+    <h1>Calcular precios con descuentos</h1>
+    <section>
+        <form action="">
+            <div class="informacion">
+                <label for="name">Producto</label>
+                <input id="name" type="text" name="name" placeholder="nombre del producto" class="name" value="">
+                <label for="precio">Precio</label>
+                <input id="precio" type="number" name="precio" placeholder="precio del producto" class="precio"
+                    value="">
+                <label for="descuento">Porcentaje en descuento</label>
+                <input id="descuento" type="number" name="descuento" placeholder="descuento del producto"
+                    class="descuento" value="">
+                <label for="bono">Bono de descuento</label>
+                <input id="bono" type="text" name="bono" placeholder="mes1,2 o 3" class="bono" value="">
+            </div>
+            <div class="resultado">
+                <p id="nombreProducto"></p>
+                <p id="precioFinal"></p>
+                <p id="mensaje"></p>
+            </div>
+            <button type="reset" id="reset-btn">Resetear</button>
+        </form>
+
+    </section>
+    <script src="./script.js"></script>
+</body>
+
+</html>
