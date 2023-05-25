@@ -1,5 +1,5 @@
 const arrayList = [50, 15, 20, 13, 19, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 40];
-
+console.log(salarios);
 function promedio(arr) {
     // console.log(arr);
     let result;
@@ -182,7 +182,7 @@ function solution(obj) {
             output.push(item);
         }
     }
-    console.log(output);
+    // console.log(output);
     return output;
     /* Esta solucion tambien funciona:
        return Object.entries(obj).map(value => {
@@ -196,7 +196,7 @@ const obj = {
 };
 
 solution(obj);
-console.log(obj);
+// console.log(obj);
 /* Output
 
 [
@@ -218,8 +218,195 @@ function solution2(obj) {
             name: objEntries[i][1],
         });
     }
-    console.log(objEntries);
-    console.log(array);
+    // console.log(objEntries);
+    // console.log(array);
     return array;
 }
 solution2(obj);
+
+/* **Reto: calcula otros tipos de promedio
+20/30** */
+/*   Promedio ponderado :
+Promedio ponderado: Se utiliza cuando se quiere asignar un peso diferente a cada valor en función de su importancia relativa. Se multiplica cada valor por su peso correspondiente, se suman los productos y se divide entre la suma de los pesos.
+
+Promedio ponderado = (Valor1 * Peso1 + Valor2 * Peso2 + ... + ValorN * PesoN) / (Peso1 + Peso2 + ... + PesoN)*/
+
+function calcularPromedioPonderado(valores, pesos) {
+    if (valores.length !== pesos.length) {
+        return Error("La cantidad de valores y pesos debe ser la misma.");
+    }
+    function sumaTodosElementosPeso(valorAcumulado, nuevoValor) {
+        return valorAcumulado + nuevoValor;
+    }
+
+    const sumaDePesos = pesos.reduce(sumaTodosElementosPeso);
+    // console.log(sumaDePesos);
+    let valorXpeso = 0;
+    for (let i = 0; i < valores.length; i++) {
+        const element = valores[i] * pesos[i];
+        valorXpeso += element;
+    }
+    // console.log(valorXpeso);
+    const promedioPonderado = valorXpeso / sumaDePesos;
+    console.log(promedioPonderado);
+    return promedioPonderado;
+}
+const valores = [5, 7, 8];
+const pesos = [2, 3, 1];
+const resultado = calcularPromedioPonderado(valores, pesos);
+console.log(resultado);
+
+/* *************************************** */
+function promedioNotasPonderado(notes) {
+    const notesWithCredit = notes.map(function (noteObject) {
+        return noteObject.note * noteObject.credit;
+    });
+    console.log(notesWithCredit);
+
+    const sumOfNotesWithCredit = notesWithCredit.reduce(function (
+        sum = 0,
+        newVal
+    ) {
+        return sum + newVal;
+    });
+    console.log(sumOfNotesWithCredit);
+    const credits = notes.map(function (noteObject) {
+        return noteObject.credit;
+    });
+    console.log(credits);
+    const sumOfCredits = credits.reduce(function (sum = 0, newVal) {
+        return sum + newVal;
+    });
+
+    const promedioPonderadoNotasConCreditos =
+        sumOfNotesWithCredit / sumOfCredits;
+    console.log(promedioPonderadoNotasConCreditos);
+
+    return promedioPonderadoNotasConCreditos;
+}
+const notes = [
+    {
+        course: "Educación Física",
+        note: 10,
+        credit: 2,
+    },
+    {
+        course: "Programación",
+        note: 8,
+        credit: 5,
+    },
+    {
+        course: "Finanzas personales",
+        note: 7,
+        credit: 5,
+    },
+];
+promedioNotasPonderado(notes);
+/* ***************************************** */
+function proyeccionPorPersona(nombrePersona) {
+    const trabajos = encontrarPersona(nombrePersona).trabajos;
+    let porcentajesCrecimiento = [];
+    for (let i = 1; i < trabajos.length; i++) {
+        const salarioActual = trabajos[i].salario;
+        const salarioAnterior = trabajos[i - 1].salario;
+        const crecimiento = salarioActual - salarioAnterior;
+        const porcentajeCrecimiento = crecimiento / salarioAnterior;
+        porcentajesCrecimiento.push(porcentajeCrecimiento);
+    }
+
+    const medianaPorcentajeCrecimiento = PlatziMath.calcularMediana(
+        porcentajesCrecimiento
+    );
+    const ultimoSalario = trabajos[trabajos.length - 1].salario;
+    // console.log(medianaPorcentajeCrecimiento);
+    // console.log(ultimoSalario);
+    const aumentoSalarial = ultimoSalario * medianaPorcentajeCrecimiento;
+    const nuevoSalario = ultimoSalario + aumentoSalarial;
+    // console.log(aumentoSalarial);
+    // console.log(nuevoSalario);
+    return nuevoSalario;
+}
+
+/* ************************************* */
+/* *****Analisis Empresarial******* */
+/* 
+Industrias Mokepon: {
+    2018:[salarios,salarios]
+    2019
+    2020
+}
+*/
+const empresas3 = {};
+salarios.forEach((persona) => {
+    persona.trabajos.forEach((trabajo) => {
+        if (!empresas3[trabajo.empresa]) {
+            empresas3[trabajo.empresa] = {};
+            // console.log(empresas3);
+        }
+        if (!empresas3[trabajo.empresa][trabajo.year]) {
+            empresas3[trabajo.empresa][trabajo.year] = [];
+            // console.log(empresas3);
+        }
+        empresas3[trabajo.empresa][trabajo.year].push(trabajo.salario);
+    });
+});
+console.log(empresas3);
+
+/* ****  Encontrar mediana por empresa y por year*** */
+function calcularMedianaPorEmpresaYear(empresa, year) {
+    console.log(empresas3[empresa]);
+
+    if (!empresas3[empresa]) {
+        console.warn("La empresa no existe");
+    } else if (!empresas3[empresa][year]) {
+        console.warn("El año no existe");
+    } else {
+        console.log(calcularMediana(empresas3[empresa][year]));
+        return calcularMediana(empresas3[empresa][year]);
+    }
+}
+calcularMedianaPorEmpresaYear("Industrias Mokepon", 2022);
+/* ********************************************* */
+/* *****   Proyeccion de rangoo medianas por empresa ***** */
+function proyeccionPorEmpresa(empresa) {
+    const medianaDeMedianas = [];
+    if (!empresas3[empresa]) {
+        console.warn("La empresa no existe");
+    } else {
+        /* si la empresa como obj existe la convierto en un arrayObj */
+        const arrayObj = Object.entries(empresas3[empresa]);
+        // console.log(arrayObj);
+        /* Recorro esa ArrayObj con un forEach */
+        arrayObj.forEach((salario) => {
+            // console.log(salario[1]);
+            /* La array de los salarios estan en la posicion una y guardo las medias de esas array en otra array */
+            medianaDeMedianas.push(calcularMediana(salario[1]));
+
+            /*A esta nueva array con las medianas les saco la mediana para octener la mediana de todos los salarios que la empresa ha generado  */
+            // console.log(calcularMediana(medianaDeMedianas));
+        });
+        console.log(medianaDeMedianas);
+
+        /* --------------------------- */
+        let porcentajesCrecimiento = [];
+
+        for (let i = 1; i < medianaDeMedianas.length; i++) {
+            const medianaActual = medianaDeMedianas[i];
+            const medianaAnterior = medianaDeMedianas[i - 1];
+            const crecimiento = medianaActual - medianaAnterior;
+            const porcentajeCrecimiento = crecimiento / medianaAnterior;
+            porcentajesCrecimiento.push(porcentajeCrecimiento);
+        }
+
+        const medianaPorcentajeCrecimiento = calcularMediana(
+            porcentajesCrecimiento
+        );
+        const ultimaMediana = medianaDeMedianas[medianaDeMedianas.length - 1];
+
+        const aumentoSalarial = ultimaMediana * medianaPorcentajeCrecimiento;
+        const nuevoSalario = ultimaMediana + aumentoSalarial;
+
+        return nuevoSalario;
+    }
+}
+proyeccionPorEmpresa("Industrias Mokepon");
