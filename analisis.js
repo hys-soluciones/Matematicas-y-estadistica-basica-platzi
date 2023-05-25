@@ -11,7 +11,7 @@ function encontrarPersona(personaBuscada) {
 function medianaPorPersona(nombrePersona) {
     const trabajos = encontrarPersona(nombrePersona).trabajos;
     const salarios = trabajos.map((elemento) => elemento.salario);
-    console.log(salarios);
+    // console.log(salarios);
     const mediana = PlatziMath.calcularMediana(salarios);
 
     return mediana;
@@ -85,7 +85,7 @@ for (persona of salarios) {
         empresas[trabajo.empresa][trabajo.year].push(trabajo.salario);
     }
 }
-console.log(empresas);
+// console.log(empresas);
 /* ******************************************* */
 function medianaEmpresaYear(nombre, year) {
     if (!empresas[nombre]) {
@@ -131,4 +131,33 @@ function proyeccionPorEmpresa(nombre) {
         return nuevaMediana;
     }
 }
-proyeccionPorEmpresa("Industrias Mokepon");
+// proyeccionPorEmpresa("Industrias Mokepon");
+
+/* *************Analisis general *************/
+function medianaGeneral() {
+    const listaMedianas = salarios.map((persona) =>
+        medianaPorPersona(persona.name)
+    );
+    const mediana = PlatziMath.calcularMediana(listaMedianas);
+    console.log(listaMedianas, mediana);
+    return mediana;
+}
+medianaGeneral();
+/* ************************ */
+function medianaTop10() {
+    const listaMedianas = salarios.map((persona) =>
+        medianaPorPersona(persona.name)
+    );
+    const medianasOrdenadas = PlatziMath.ordenarLista(listaMedianas);
+    console.log(medianasOrdenadas);
+    const cantidad = medianasOrdenadas.length / (medianasOrdenadas.length / 2);
+
+    const limite = medianasOrdenadas.length - cantidad;
+
+    const top10 = medianasOrdenadas.slice(limite, medianasOrdenadas.length);
+    const medianaTop10 = PlatziMath.calcularMediana(top10);
+
+    console.log(medianaTop10);
+    return medianaTop10;
+}
+medianaTop10();

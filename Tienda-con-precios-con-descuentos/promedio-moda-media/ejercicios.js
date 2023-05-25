@@ -35,7 +35,7 @@ function promedioConMetodoReduce(lista) {
     return promedio;
 }
 
-promedioConMetodoReduce(arrayList);
+// promedioConMetodoReduce(arrayList);
 
 /*  Funcion para saber si un array es par o impar */
 
@@ -248,13 +248,13 @@ function calcularPromedioPonderado(valores, pesos) {
     }
     // console.log(valorXpeso);
     const promedioPonderado = valorXpeso / sumaDePesos;
-    console.log(promedioPonderado);
+    // console.log(promedioPonderado);
     return promedioPonderado;
 }
 const valores = [5, 7, 8];
 const pesos = [2, 3, 1];
 const resultado = calcularPromedioPonderado(valores, pesos);
-console.log(resultado);
+// console.log(resultado);
 
 /* *************************************** */
 function promedioNotasPonderado(notes) {
@@ -301,7 +301,7 @@ const notes = [
         credit: 5,
     },
 ];
-promedioNotasPonderado(notes);
+// promedioNotasPonderado(notes);
 /* ***************************************** */
 function proyeccionPorPersona(nombrePersona) {
     const trabajos = encontrarPersona(nombrePersona).trabajos;
@@ -350,7 +350,7 @@ salarios.forEach((persona) => {
         empresas3[trabajo.empresa][trabajo.year].push(trabajo.salario);
     });
 });
-console.log(empresas3);
+// console.log(empresas3);
 
 /* ****  Encontrar mediana por empresa y por year*** */
 function calcularMedianaPorEmpresaYear(empresa, year) {
@@ -365,7 +365,7 @@ function calcularMedianaPorEmpresaYear(empresa, year) {
         return calcularMediana(empresas3[empresa][year]);
     }
 }
-calcularMedianaPorEmpresaYear("Industrias Mokepon", 2022);
+// calcularMedianaPorEmpresaYear("Industrias Mokepon", 2022);
 /* ********************************************* */
 /* *****   Proyeccion de rangoo medianas por empresa ***** */
 function proyeccionPorEmpresa(empresa) {
@@ -409,4 +409,4 @@ function proyeccionPorEmpresa(empresa) {
         return nuevoSalario;
     }
 }
-proyeccionPorEmpresa("Industrias Mokepon");
+// proyeccionPorEmpresa("Industrias Mokepon");
